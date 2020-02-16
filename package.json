@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://git@github.com/NicolasVenne/InferenceEngine.git"
+    "url": "git://github.com/NicolasVenne/InferenceEngine.git"
   },
   "keywords": [
     "Inference.",
