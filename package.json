@@ -1,0 +1,30 @@
+{
+  "name": "inferenceengine",
+  "version": "1.0.0",
+  "description": "Inference Engine using forward chaining in javascript for Expert Systems, Laurentian university 2020",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js",
+    "debug": "node --nolazy --inspect-brk=9229 test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/NicolasVenne/InferenceEngine.git"
+  },
+  "keywords": [
+    "Inference.",
+    "Engine",
+    "Forward",
+    "Chaining"
+  ],
+  "author": "Nicolas Venne",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NicolasVenne/InferenceEngine/issues"
+  },
+  "homepage": "https://github.com/NicolasVenne/InferenceEngine#readme",
+  "dependencies": {
+    "firebase-admin": "^8.9.2",
+    "prompts": "^2.3.1"
+  }
+}
