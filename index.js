@@ -71,7 +71,7 @@ InferenceEngine.prototype.ask = async function(input) {
 
     
     
-    console.log(possibleRules)
+    return possibleRules;
 
 
 }
