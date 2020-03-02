@@ -1,6 +1,6 @@
 {
-  "name": "inferenceengine",
-  "version": "1.0.0",
+  "name": "@nicolasvenne/inferenceengine",
+  "version": "1.0.1",
   "description": "Inference Engine using forward chaining in javascript for Expert Systems, Laurentian university 2020",
   "main": "index.js",
   "scripts": {

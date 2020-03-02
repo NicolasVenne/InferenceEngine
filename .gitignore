@@ -2,5 +2,5 @@
 inferenceengine-cc273-firebase-adminsdk-2wlqq-270abd13a0.json
 node_modules/
 .vscode/launch.json
-
+.npmrc
 package-lock.json
