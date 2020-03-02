@@ -40,9 +40,9 @@ InferenceEngine.prototype.subscribeToKnowledge = async function() {
 // left leg hurts, red skin
 // ['/body/skin/red','/body/skin/purple']
 
-InferenceEngine.prototype.ask = async function(input) {
+InferenceEngine.prototype.ask = async function(input, id = "") {
 
-    let parsed = await this.parseFacts(input)
+    let parsed = await this.parseFacts(input, id)
 
     let possibleRules = {};
 
@@ -77,7 +77,7 @@ InferenceEngine.prototype.ask = async function(input) {
 }
 
 
-InferenceEngine.prototype.parseFacts = async function(input) {
+InferenceEngine.prototype.parseFacts = async function(input, id) {
     let unparsedFacts = input.split(",");
     let parsedFacts = [];
 
@@ -104,7 +104,7 @@ InferenceEngine.prototype.parseFacts = async function(input) {
                 searchFacts(this._facts, synonyms.pop(), result);
             } else {
                 while(result.result.length == 0) {
-                    let msg = await this._prompt(`I don't understand: ${unparsedFacts[index]}`);
+                    let msg = await this._prompt(`I don't understand: ${unparsedFacts[index]}`, id);
                     if(msg == 0) {
                         break;
                     }
