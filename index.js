@@ -68,12 +68,47 @@ InferenceEngine.prototype.ask = async function(input, id = "") {
     }
 
 
-
+    if(this._prompt instanceof Function) {
+        this._prompt({type: "select", options: ["yes", "no"], message: "Did you find your diagnosis?"}, id).then((response) => {
+            if(response === "no") {
+                this._prompt({type: "input", message: "What is your diagnosis?"},id).then((response) => {
+                    let array = []
+                    for(let key in parsed) {
+                        array.push(key);
+                    }
+                    this._rules[response] = array;
+                    this.inferFromRule(response);
+                    this.updateDatabase();
+                })
+            } 
+        })
+    }
     
     
     return possibleRules;
 
 
+}
+
+InferenceEngine.prototype.inferFromRule = function(rule) {
+    let r = this._rules[rule];
+
+    for(let fact in r) {
+        let f = r[fact];
+        if(f.charAt(0) === "/") {
+            f = f.slice(1,f.length);
+        }
+        f = f.split("/");
+        let find = this._facts[f.shift()];
+        while(f.length !== 0) {
+            find = find[f.shift()];
+        }
+        find.push(rule);
+    }
+}
+
+InferenceEngine.prototype.updateDatabase = function() {
+    this._kb.update({facts: this._facts, rules: this._rules});
 }
 
 
@@ -104,7 +139,7 @@ InferenceEngine.prototype.parseFacts = async function(input, id) {
                 searchFacts(this._facts, synonyms.pop(), result);
             } else {
                 while(result.result.length == 0) {
-                    let msg = await this._prompt(`I don't understand: ${unparsedFacts[index]}`, id);
+                    let msg = await this._prompt({type: "input", message: `I don't understand: ${unparsedFacts[index]}`}, id);
                     if(msg == 0) {
                         break;
                     }

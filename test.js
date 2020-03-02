@@ -19,12 +19,12 @@ process.on('SIGTERM', cleanExit); // catch kill
                 const response = await prompts({
                     type: "text",
                     name: "message",
-                    message: prompt
+                    message: prompt.message
                 })
                 resolve(response.message);
             })
         })
-        await engine.ask("shakings, skin red, cold skin, mumbling")
+        console.log(await engine.ask("shakings, skin red, cold skin, mumbling"))
 
     } catch(e) {
         console.error(e);
