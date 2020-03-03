@@ -69,19 +69,24 @@ InferenceEngine.prototype.ask = async function(input, id = "") {
 
 
     if(this._prompt instanceof Function) {
-        this._prompt({type: "select", options: ["yes", "no"], message: "Did you find your diagnosis?"}, id).then((response) => {
-            if(response === "no") {
-                this._prompt({type: "input", message: "What is your diagnosis?"},id).then((response) => {
-                    let array = []
-                    for(let key in parsed) {
-                        array.push(key);
-                    }
-                    this._rules[response] = array;
-                    this.inferFromRule(response);
-                    this.updateDatabase();
-                })
-            } 
-        })
+        setTimeout(() => {
+            this._prompt({type: "select", options: ["yes", "no"], message: "Find your diagnosis?"}, id).then((response) => {
+                if(response === "no") {
+                    this._prompt({type: "input", message: "What is your diagnosis?"},id).then((response) => {
+                        let array = []
+                        for(let key in parsed) {
+                            array.push(key);
+                        }
+                        this._rules[response] = array;
+                        this.inferFromRule(response);
+                        this.updateDatabase();
+                        this._prompt(0, id);
+                    })
+                } else {
+                    this._prompt(0, id);
+                }
+            })
+        }, 2000)
     }
     
     
